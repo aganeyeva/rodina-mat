@@ -33,6 +33,7 @@
   <div id="clock"></div>
 <script>
   var MORNING = 'img/tesh.jpg';
+  var EVENING = 'img/kiyem.jpg';
   var DAY = [
     { src: 'img/posudomoyka.jpg', text: 'Посудомойканы бушатырга онытма!' },
     { src: 'img/oscar.jpg',       text: 'Оскарны ашаттыңмы?' },
@@ -45,6 +46,9 @@
     if (h >= 6 && h < 9) {
       src = MORNING;
       label = 'Иртәнге постер · 06:00–09:00';
+    } else if (h >= 19 && h < 23) {
+      src = EVENING;
+      label = 'Кичке постер · 19:00–23:00';
     } else {
       var p = DAY[h % 4];
       src = p.src;
