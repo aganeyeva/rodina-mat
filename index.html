@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="tt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Плакатлар</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: #141414;
+    color: #f5f2ea;
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 20px;
+  }
+  img#poster {
+    max-height: 78vh; max-width: 92vw;
+    border: 3px solid #d93a2b;
+    box-shadow: 0 0 40px rgba(217,58,43,.25);
+    background: #fbfaf6;
+  }
+  #caption {
+    margin-top: 16px; font-size: 1.35rem; font-weight: 700;
+    color: #d93a2b; text-align: center; letter-spacing: .02em;
+  }
+  #clock { margin-top: 8px; font-size: .95rem; color: #8a8a8a; text-align: center; }
+</style>
+</head>
+<body>
+  <img id="poster" alt="постер">
+  <div id="caption"></div>
+  <div id="clock"></div>
+<script>
+  var MORNING = 'img/tesh.jpg';
+  var DAY = [
+    { src: 'img/posudomoyka.jpg', text: 'Посудомойканы бушатырга онытма!' },
+    { src: 'img/oscar.jpg',       text: 'Оскарны ашаттыңмы?' },
+    { src: 'img/lunchbox.jpg',    text: 'Did you put lunchbox to the dishwasher?' },
+    { src: 'img/bulma.jpg',       text: 'Бүлмәң чистамы?' }
+  ];
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function pick(){
+    var now = new Date(), h = now.getHours(), src, label;
+    if (h >= 6 && h < 9) {
+      src = MORNING;
+      label = 'Иртәнге постер · 06:00–09:00';
+    } else {
+      var p = DAY[h % 4];
+      src = p.src;
+      label = p.text;
+    }
+    document.getElementById('poster').src = src;
+    document.getElementById('caption').textContent = label;
+    document.getElementById('clock').textContent =
+      'Хәзер ' + pad(h) + ':' + pad(now.getMinutes()) +
+      ' · киләсе алмашу ' + pad((h + 1) % 24) + ':00';
+  }
+  pick();
+  setInterval(pick, 60000);
+</script>
+</body>
+</html>
