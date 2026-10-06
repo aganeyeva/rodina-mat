@@ -26,12 +26,13 @@
   <img id="poster" alt="постер">
 <script>
   var MORNING = 'img/tesh.jpg';
-  var EVENING = 'img/kiyem.jpg';
+  var EVENING = ['img/kiyem.jpg', 'img/dog-kiyem.jpg'];
   var DAY = [
     'img/posudomoyka.jpg',
     'img/oscar.jpg',
     'img/lunchbox.jpg',
-    'img/bulma.jpg'
+    'img/bulma.jpg',
+    'img/dog-bulma.jpg'
   ];
   function pick(){
     var h = new Date().getHours(), src;
@@ -39,10 +40,10 @@
       src = MORNING;
 
     } else if (h >= 19 && h < 23) {
-      src = EVENING;
+      src = EVENING[h % 2];
 
     } else {
-      src = DAY[h % 4];
+      src = DAY[h % DAY.length];
     }
     document.getElementById('poster').src = src;
   }
