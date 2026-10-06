@@ -20,45 +20,31 @@
     box-shadow: 0 0 40px rgba(217,58,43,.25);
     background: #fbfaf6;
   }
-  #caption {
-    margin-top: 16px; font-size: 1.35rem; font-weight: 700;
-    color: #d93a2b; text-align: center; letter-spacing: .02em;
-  }
-  #clock { margin-top: 8px; font-size: .95rem; color: #8a8a8a; text-align: center; }
 </style>
 </head>
 <body>
   <img id="poster" alt="постер">
-  <div id="caption"></div>
-  <div id="clock"></div>
 <script>
   var MORNING = 'img/tesh.jpg';
   var EVENING = 'img/kiyem.jpg';
   var DAY = [
-    { src: 'img/posudomoyka.jpg', text: 'Посудомойканы бушатырга онытма!' },
-    { src: 'img/oscar.jpg',       text: 'Оскарны ашаттыңмы?' },
-    { src: 'img/lunchbox.jpg',    text: 'Did you put lunchbox to the dishwasher?' },
-    { src: 'img/bulma.jpg',       text: 'Бүлмәң чистамы?' }
+    'img/posudomoyka.jpg',
+    'img/oscar.jpg',
+    'img/lunchbox.jpg',
+    'img/bulma.jpg'
   ];
-  function pad(n){ return String(n).padStart(2,'0'); }
   function pick(){
-    var now = new Date(), h = now.getHours(), src, label;
+    var h = new Date().getHours(), src;
     if (h >= 6 && h < 9) {
       src = MORNING;
-      label = 'Иртәнге постер · 06:00–09:00';
+
     } else if (h >= 19 && h < 23) {
       src = EVENING;
-      label = 'Кичке постер · 19:00–23:00';
+
     } else {
-      var p = DAY[h % 4];
-      src = p.src;
-      label = p.text;
+      src = DAY[h % 4];
     }
     document.getElementById('poster').src = src;
-    document.getElementById('caption').textContent = label;
-    document.getElementById('clock').textContent =
-      'Хәзер ' + pad(h) + ':' + pad(now.getMinutes()) +
-      ' · киләсе алмашу ' + pad((h + 1) % 24) + ':00';
   }
   pick();
   setInterval(pick, 60000);
