@@ -35,15 +35,18 @@
     'img/dog-bulma.jpg'
   ];
   function pick(){
-    var h = new Date().getHours(), src;
+    var now = new Date(),
+        h = now.getHours(),
+        slot = Math.floor((h * 60 + now.getMinutes()) / 10),
+        src;
     if (h >= 6 && h < 9) {
       src = MORNING;
 
     } else if (h >= 19 && h < 23) {
-      src = EVENING[h % 2];
+      src = EVENING[slot % EVENING.length];
 
     } else {
-      src = DAY[h % DAY.length];
+      src = DAY[slot % DAY.length];
     }
     document.getElementById('poster').src = src;
   }
